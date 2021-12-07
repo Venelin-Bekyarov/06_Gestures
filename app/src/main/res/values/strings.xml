@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">06_Gestures</string>
     <string name="vens_Text">TextView</string>
+    <string name="vens_button">Button</string>
 </resources>

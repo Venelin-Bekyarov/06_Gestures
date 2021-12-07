@@ -1,9 +1,10 @@
 package com.thenewboston.a06_gestures;
 
-import android.gesture.GestureOverlayView;
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
+import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -11,7 +12,8 @@ import androidx.core.view.GestureDetectorCompat;
 
 
 public class MainActivity extends AppCompatActivity implements GestureDetector.OnGestureListener,
-GestureDetector.OnDoubleTapListener{
+        GestureDetector.OnDoubleTapListener {
+
 
     private TextView vensMessage;
     private GestureDetectorCompat gestureDetector;
@@ -21,8 +23,25 @@ GestureDetector.OnDoubleTapListener{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        vensMessage = (TextView)findViewById(R.id.vensMessage);
-        this.gestureDetector = new GestureDetectorCompat(this,this);
+        Button vensButton = (Button) findViewById(R.id.vensButton);
+        vensButton.setOnClickListener(
+                v -> {
+                    @SuppressLint("CutPasteId") TextView vensText = (TextView) findViewById(R.id.vensMessage);
+                    vensText.setText("Good job!");
+                }
+        );
+
+
+        vensButton.setOnLongClickListener(
+                v -> {
+                    TextView vensText = (TextView) findViewById(R.id.vensMessage);
+                    vensText.setText("Wrong Step");
+                    return true;
+                }
+        );
+
+        vensMessage = (TextView) findViewById(R.id.vensMessage);
+        this.gestureDetector = new GestureDetectorCompat(this, this);
         gestureDetector.setOnDoubleTapListener(this);
     }
 
